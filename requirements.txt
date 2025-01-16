@@ -1,0 +1,10 @@
+pandas
+bert-score
+langchain
+langchain-ollama
+langchain-chroma
+langchain-community
+langchain-huggingface
+langchain-groq
+faiss-cpu
+rank_bm25
