@@ -4,7 +4,7 @@ from langchain_community.vectorstores import FAISS
 from model import Model
 from retriever import Retriever
 from prompts import get_prompt, combined_template, interp_template
-from agent import RAGAgent, InterpAgent
+from agent import CodeRAGAgent, InterpRAGAgent
 
 
 def main(df=pd.read_csv('sample_product.csv'),
@@ -18,10 +18,10 @@ def main(df=pd.read_csv('sample_product.csv'),
                        temperature=0.2,
                        top_p=0.1)
     prompt = get_prompt(combined_template)
-    processor = RAGAgent(retriever, prompt, code_model, df)
+    processor = CodeRAGAgent(retriever, prompt, code_model, df)
     interp_prompt = get_prompt(interp_template)
     #interp_model = Model(model_name="llama-3.3-70b-versatile",temperature=0.2,top_p=0.1)
-    interp = InterpAgent(interp_prompt, code_model)
+    interp = InterpRAGAgent(interp_prompt, code_model)
 
     ctx = processor.invoke(query)
     interp.invoke(ctx, query)

@@ -1,7 +1,7 @@
 from execute import execute_code, format_response
 
 
-class RAGAgent:
+class CodeRAGAgent:
     def __init__(self, retriever, prompt, model, df):
         self.retriever = retriever
         self.prompt = prompt
@@ -27,7 +27,7 @@ class RAGAgent:
         return {'code': code, 'result': result}
 
     
-class InterpAgent:
+class InterpRAGAgent:
     def __init__(self, prompt, model):
         self.prompt = prompt
         self.model = model
