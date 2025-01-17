@@ -1,10 +1,10 @@
-# Project Introduction:
+### Project Introduction:
 This project focuses on building a tabular data Q&A system by using double rag with language models.
 
-# Set up environment
+### Set up environment
 pip install -r requirements.txt
 
-# Modules Introduction:
+### Modules Introduction:
 - `main.py`: Main script to execute experiments.
 - `agent.py`: Implementation of the double RAG agent -- CodeRAGAgent and InterpRAGAgent.
 - `model.py`: Manages calls to LLM APIs from langchain_ollama and ChatGroq.
@@ -19,5 +19,5 @@ pip install -r requirements.txt
 - `test_case.ipynb`:  Tests cases using the best combination chosen by test_evaluate.py file.
 
 
-# System Architecture Diagram
+### System Architecture Diagram
 ![System Architecture Diagram](architecture.001.jpeg)
