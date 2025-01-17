@@ -9,5 +9,3 @@ venv/
 # Ignore log files
 *.log
 
-# Ignore images
-*.jpeg
