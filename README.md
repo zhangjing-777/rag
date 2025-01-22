@@ -24,8 +24,9 @@ Usage:
    ```
    The application will process the query and output the results to the console.
 
--For calling the main function with your desired DataFrame and query:
+- For calling the main function with your desired DataFrame and query:
    ```python
+   from main import main
    main(df=pd.read_csv('your_file.csv'), query="Your question here")
    ```
 
@@ -33,13 +34,21 @@ Usage:
 This file defines the `CodeRAGAgent` and `InterpRAGAgent` classes, which are responsible for processing queries and generating responses using a retrieval-augmented generation approach.
 
 Functionality:
-- The `CodeRAGAgent` class retrieves relevant context(schema information of the dataframe) based on a query, formats a prompt, invokes a model,and executes the generated code to obtain results.
+- The `CodeRAGAgent` class retrieves relevant context(schema information of the dataframe) based on a query, formats the combined_prompt, invokes the model use combined_prompt as the prompt,and executes the generated code to obtain results.
 - The `InterpRAGAgent` class processes context(the results of the `CodeRAGAgent`) and queries to generate textual responses using a model,and formats the output for user-friendly presentation.
 
 Usage:
 - For the `CodeRAGAgent`:
 1. Create an instance of the `CodeRAGAgent` class with the necessary parameters(the retriever, prompt, and model are instances of the classes/functions defined in the retriever.py, prompt.py, and model.py files, respectively.):
    ```python
+   from agent import CodeRAGAgent
+   from retriever import Retriever
+   from prompt import get_prompt
+   from model import Model
+
+   retriever = Retriever(mode=your_mode, embed_model_name=your_embed_model_name, db=your_db)
+   prompt = get_prompt(combined_template)
+   model = Model(model_name="your_model_name", additional_param=dict(key=value))
    agent = CodeRAGAgent(retriever, prompt, model, df)
    ```
 2. Call the invoke method with a query to get the generated code and execution result:
@@ -50,11 +59,17 @@ Usage:
 - For the `InterpRAGAgent`:
 1. Create an instance similarly(the prompt and model are instances of the classes/functions defined in the prompt.py and model.py files, respectively.):
    ```python
+   from agent import InterpRAGAgent
+   from prompt import get_prompt
+   from model import Model
+
+   prompt = get_prompt(interp_template)
+   model = Model(model_name="your_model_name", additional_param=dict(key=value))
    interp_agent = InterpRAGAgent(prompt, model)
    ```
 2. Call the invoke method with context(the results of the CodeRAGAgent) and query to get the formatted response:
    ```python
-   response = interp_agent.invoke(context, query)
+   response = interp_agent.invoke(result, query)
    ```
 
 ## `model.py`
@@ -67,6 +82,8 @@ Functionality:
 Usage:
 1. Import this file and create an instance of the Model class:
    ```python
+   from model import Model
+
    model_instance = Model(model_name="your_model_name", additional_param=dict(key=value))
    ```
 2. Call the invoke method and pass in a prompt:
@@ -90,6 +107,8 @@ Functionality:
 Usage:
 1. Import this file and create an instance of the Prompt Template object:
    ```python
+   from prompts import get_prompt, combined_template, interp_template
+
    prompt_object = get_prompt(combined_template)
    ```
    or
@@ -112,6 +131,10 @@ Functionality:
 Usage:
 1. Import this file and create an instance of the Retriever class:
    ```python
+   from retriever import Retriever
+   from langchain_chroma import Chroma 
+   from langchain_community.vectorstores import FAISS
+
    retriever_instance = Retriever(mode="your_mode", embed_model_name="your_model_name", db=your_db)
    ```
 2. Call the retrieve_schema method with a query and DataFrame:
@@ -131,10 +154,14 @@ Functionality:
 Usage:
 1. Import this file and call the `execute_code` function with the generated code:
    ```python
+   from execute import execute_code
+
    result = execute_code(generated_code)
    ```
 2. Call the `format_response` function with the response:
    ```python
+   from execute import format_response
+
    formatted_response = format_response(response)
    ```
 
@@ -154,6 +181,8 @@ Usage:
 - For retrieval evaluation:
 1. Create an instance of the RetrievalEvaluator class with retrieved and relevant documents:
    ```python
+   from evaluator import RetrievalEvaluator
+
    evaluator = RetrievalEvaluator(retrieved_docs, relevant_docs)
    ```
 2. Call the evaluate method to get the evaluation metrics:
@@ -164,16 +193,22 @@ Usage:
 - For code generation evaluation:
 1. Create an instance of the GenerCodeEvaluator class with generated code and reference code:
    ```python
+   from evaluator import GenerCodeEvaluator
+
    code_evaluator = GenerCodeEvaluator(generated_code, reference_code)
    ```
 2. Call the evaluate method to get the Exact Match and F1 Score:
    ```python
+   from evaluator import GenerCodeEvaluator
+
    code_metrics = code_evaluator.evaluate()
    ```
 
 - For textual generation evaluation:
 Use the bert_score_f1 function to compute the F1 score between generated text and reference text:
    ```python
+   from evaluator import bert_score_f1
+   
    f1_score = bert_score_f1(generated_text, reference_text)
    ```
 
