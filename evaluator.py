@@ -1,6 +1,6 @@
 """_summary_
 
-This file defines classes for evaluating retrieval and generated code performance.
+This file defines classes and functions for evaluating retrieval and generation models performance.
 It includes metrics such as Recall@k and Mean Reciprocal Rank (MRR) for retrieval evaluation,
 Exact Match and F1 Score for code generation evaluation,
 and a function for computing the F1 score using the BERTScore method for textual generation evaluation.
@@ -22,7 +22,7 @@ For retrieval evaluation:
    ```
 
 For code generation evaluation:
-1. Create an instance of the GenerCodeEvaluator class:
+1. Create an instance of the GenerCodeEvaluator class with generated code and reference code:
    ```python
    code_evaluator = GenerCodeEvaluator(generated_code, reference_code)
    ```
@@ -32,7 +32,7 @@ For code generation evaluation:
    ```
 
 For textual generation evaluation:
-Use the bert_score_f1 function to compute the F1 score:
+Use the bert_score_f1 function to compute the F1 score between generated text and reference text:
    ```python
    f1_score = bert_score_f1(generated_text, reference_text)
    ```

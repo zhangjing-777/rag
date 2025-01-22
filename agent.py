@@ -11,7 +11,9 @@ Functionality:
 
 Usage:
 For the CodeRAGAgent:
-1. Create an instance of the CodeRAGAgent class with the necessary parameters:
+1. Create an instance of the CodeRAGAgent class with the necessary parameters(the retriever, 
+prompt, and model are instances of the classes/functions defined in the retriever.py, 
+prompt.py, and model.py files, respectively.):
    ```python
    agent = CodeRAGAgent(retriever, prompt, model, df)
    ```
@@ -21,7 +23,9 @@ For the CodeRAGAgent:
    ```
 
 For the InterpRAGAgent:
-1. Create an instance similarly:
+1. Create an instance similarly(the prompt and model are 
+instances of the classes/functions defined in the prompt.py 
+and model.py files, respectively.):
    ```python
    interp_agent = InterpRAGAgent(prompt, model)
    ```

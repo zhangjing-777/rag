@@ -10,7 +10,7 @@ Functionality:
 Usage:
 1. Import this file and create an instance of the Retriever class:
    ```python
-   retriever_instance = Retriever(mode="your_mode", embed_model_name="your_model_name", db=your_db_instance)
+   retriever_instance = Retriever(mode="your_mode", embed_model_name="your_model_name", db=your_db)
    ```
 2. Call the retrieve_schema method with a query and DataFrame:
    ```python

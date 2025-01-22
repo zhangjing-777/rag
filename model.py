@@ -9,13 +9,13 @@ Functionality:
 Usage:
 1. Import this file and create an instance of the Model class:
    ```python
-   model_instance = Model(model_name="your_model_name", additional_param=value)
+   model_instance = Model(model_name="your_model_name", additional_param=dict(key=value))
    ```
 2. Call the invoke method and pass in a prompt:
    ```python
    response = model_instance.invoke("Your prompt content")
    ```
-3. Depending on the model, the invoke method will return the corresponding result:
+   Depending on the model, the invoke method will return the corresponding result:
    - If the model name contains '-', the remote model (ChatGroq) will be used.
    - Otherwise, the local model (OllamaLLM) will be used.
 
