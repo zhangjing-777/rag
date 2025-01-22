@@ -7,16 +7,16 @@ pip install -r requirements.txt
 # Modules Introduction:
 ## `main.py`
 This file serves as the entry point for the application, orchestrating the main functionality
-of the retrieval-augmented generation system. It initializes necessary components, processes input data,and handles user queries to generate responses.
+of the retrieval-augmented generation system. It initializes necessary components(uses the best parameter combination chosen by the test_evaluate.ipynb file), processes input data,and handles user queries to generate responses.
 
 Functionality:
 
-- The `main` function reads a DataFrame from a CSV file, initializes the retriever, prompt and model,and sets up the agents for code generation and interpretation.It processes a predefined query to retrieve relevant information and generate a response.
+- The `main` function reads a DataFrame from a CSV file, initializes the retriever, prompt and model(instances of the classes/functions defined in the retriever.py, prompt.py, and model.py files respectively),and sets up the agents for code generation and interpretation.It processes a predefined query to retrieve relevant information and generate a response.
 - The application can be run directly, executing the main function.
 
 Usage:
 
-For running directly:
+- For running directly:
 1. Ensure the required CSV file ('sample_product.csv') is available in the working directory.
 2. Run the script to execute the main function:
    ```bash
@@ -24,7 +24,7 @@ For running directly:
    ```
    The application will process the query and output the results to the console.
 
-For calling the main function with your desired DataFrame and query:
+-For calling the main function with your desired DataFrame and query:
    ```python
    main(df=pd.read_csv('your_file.csv'), query="Your question here")
    ```
@@ -37,7 +37,7 @@ Functionality:
 - The `InterpRAGAgent` class processes context(the results of the `CodeRAGAgent`) and queries to generate textual responses using a model,and formats the output for user-friendly presentation.
 
 Usage:
-For the `CodeRAGAgent`:
+- For the `CodeRAGAgent`:
 1. Create an instance of the `CodeRAGAgent` class with the necessary parameters(the retriever, prompt, and model are instances of the classes/functions defined in the retriever.py, prompt.py, and model.py files, respectively.):
    ```python
    agent = CodeRAGAgent(retriever, prompt, model, df)
@@ -47,7 +47,7 @@ For the `CodeRAGAgent`:
    result = agent.invoke(query)
    ```
 
-For the `InterpRAGAgent`:
+- For the `InterpRAGAgent`:
 1. Create an instance similarly(the prompt and model are instances of the classes/functions defined in the prompt.py and model.py files, respectively.):
    ```python
    interp_agent = InterpRAGAgent(prompt, model)
@@ -151,7 +151,7 @@ Functionality:
 - The `bert_score_f1` function computes the F1 score using the BERTScore method for comparing generated and reference texts.
 
 Usage:
-For retrieval evaluation:
+- For retrieval evaluation:
 1. Create an instance of the RetrievalEvaluator class with retrieved and relevant documents:
    ```python
    evaluator = RetrievalEvaluator(retrieved_docs, relevant_docs)
@@ -161,7 +161,7 @@ For retrieval evaluation:
    metrics = evaluator.evaluate()
    ```
 
-For code generation evaluation:
+- For code generation evaluation:
 1. Create an instance of the GenerCodeEvaluator class with generated code and reference code:
    ```python
    code_evaluator = GenerCodeEvaluator(generated_code, reference_code)
@@ -171,7 +171,7 @@ For code generation evaluation:
    code_metrics = code_evaluator.evaluate()
    ```
 
-For textual generation evaluation:
+- For textual generation evaluation:
 Use the bert_score_f1 function to compute the F1 score between generated text and reference text:
    ```python
    f1_score = bert_score_f1(generated_text, reference_text)

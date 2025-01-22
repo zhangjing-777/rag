@@ -1,12 +1,14 @@
 """_summary_
 
 This file serves as the entry point for the application, orchestrating the main functionality
-of the retrieval-augmented generation system. It initializes necessary components, processes input data,
+of the retrieval-augmented generation system. It initializes necessary components(uses the best 
+parameter combination chosen by the test_evaluate.ipynb file), processes input data,
 and handles user queries to generate responses.
 
 Functionality:
-- The main function reads a DataFrame from a CSV file, initializes the retriever, prompt and model,
-  and sets up the agents for code generation and interpretation.
+- The main function reads a DataFrame from a CSV file, initializes the retriever, prompt 
+  and model(instances of the classes/functions defined in the retriever.py, prompt.py, 
+  and model.py files respectively),and sets up the agents for code generation and interpretation.
 - It processes a predefined query to retrieve relevant information and generate a response.
 - The application can be run directly, executing the main function.
 
