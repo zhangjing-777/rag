@@ -43,7 +43,7 @@ Usage:
    ```python
    from agent import CodeRAGAgent
    from retriever import Retriever
-   from prompt import get_prompt
+   from prompt import get_prompt, combined_template
    from model import Model
 
    retriever = Retriever(mode=your_mode, embed_model_name=your_embed_model_name, db=your_db)
@@ -60,7 +60,7 @@ Usage:
 1. Create an instance similarly(the prompt and model are instances of the classes/functions defined in the prompt.py and model.py files, respectively.):
    ```python
    from agent import InterpRAGAgent
-   from prompt import get_prompt
+   from prompt import get_prompt, interp_template
    from model import Model
 
    prompt = get_prompt(interp_template)
@@ -199,8 +199,6 @@ Usage:
    ```
 2. Call the evaluate method to get the Exact Match and F1 Score:
    ```python
-   from evaluator import GenerCodeEvaluator
-
    code_metrics = code_evaluator.evaluate()
    ```
 
@@ -208,13 +206,13 @@ Usage:
 Use the bert_score_f1 function to compute the F1 score between generated text and reference text:
    ```python
    from evaluator import bert_score_f1
-   
+
    f1_score = bert_score_f1(generated_text, reference_text)
    ```
 
 
 ## `test_evaluate.ipynb`
-In this notebook, I use these metrics defined in the evaluator.py file to test the performance of the different parameters of the Retriever class, code generation Model class and textual response generation Model class separately. And then choose the best combination for each class to use in the main.py file.
+In this notebook, I use these metrics defined in the `evaluator.py` file to test the performance of the different parameters of the Retriever class, code generation Model class and textual response generation Model class separately. And then choose the best combination for each class to use in the `main.py` file.
 
 ## `test_case.ipynb`
 
