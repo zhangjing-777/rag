@@ -1,6 +1,14 @@
+# This file defines a function and strings for generating prompts related to data analysis.
+# It primarily includes two templates: one for generating prompts for pandas DataFrame query code,
+# and another for extracting the user's question and the corresponding Python code results.
+# These templates are designed to assist users in generating effective pandas operation code 
+# from natural language questions and providing clear answers.
+
+
 from langchain.prompts import PromptTemplate
 
 
+# Creates a prompt template object that generates dynamic prompt content based on the given template and input variables.
 def get_prompt(template):                
     prompt = PromptTemplate(
         template=template,
@@ -8,7 +16,9 @@ def get_prompt(template):
     )
     return prompt
   
-            
+#For the first_layer Agent that is used to generate the python code.
+#The prompt engineering technologies I use are Chain of Thought and few_shot 
+# to tell the model how to think and provide some typical and extreme examples to help him generate corrector answers.          
 combined_template = """You are a pandas dataframe query code generator. The name of the dataframe is `df`. Your task is to answer the question with pandas dataframe operation code.
 
               The question is: {question}
@@ -88,6 +98,9 @@ combined_template = """You are a pandas dataframe query code generator. The name
               ```
               """
 
+
+#For the second_layer Agent that is used to generate the final answer.
+#Uses the one_shot prompt engineering
 interp_template ="""
       You are an intelligent data analysis assistant. 
       Your task is to extract the most relevant data from the user's question, the corresponding Python code, and its execution result, and provide a clear and concise one-sentence answer to the user.  
