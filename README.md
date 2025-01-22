@@ -23,7 +23,7 @@ Functionality:
 Usage:
 
 - For running directly:
-1. Ensure the required CSV file ('sample_product.csv') is available in the working directory.
+1. Ensure the required CSV file ('data/product.csv') is available in the working directory.
 2. Run the script to execute the main function:
    ```bash
    python main.py

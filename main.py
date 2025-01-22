@@ -13,7 +13,7 @@ Functionality:
 - The application can be run directly, executing the main function.
 
 Usage:
-1. Ensure the required CSV file ('sample_product.csv') is available in the working directory.
+1. Ensure the required CSV file ('data/product.csv') is available in the working directory.
 2. Run the script to execute the main function:
    ```bash
    python main.py
@@ -35,7 +35,7 @@ from prompts import get_prompt, combined_template, interp_template
 from agent import CodeRAGAgent, InterpRAGAgent
 
 
-def main(df=pd.read_csv('sample_product.csv'),
+def main(df=pd.read_csv('data/product.csv'),
          query="What is the average price of the products?"):
     # Initialize components with the best parameter combination tested in the test_evaluate notebook
     retriever = Retriever(mode='hybrid', 
