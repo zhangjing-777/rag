@@ -4,6 +4,10 @@ This project focuses on building a tabular data Q&A system by using double rag w
 # Set up environment
 pip install -r requirements.txt
 
+# Data
+- The data used in the `test_case.ipynb` are the `students_performance.csv`  and `product.csv` files. The `students_performance.csv` is downloaded from the [kaggle](https://www.kaggle.com/datasets/spscientist/students-performance-in-exams) website, and the `product.csv` is randomly generated using pandas code.
+- The data used in the `test_evaluate.ipynb` is the `sample_score.csv` file, which is created by randomly selecting 20 rows of data from the `students_performance.csv` file.
+
 # Modules Introduction:
 ## `main.py`
 This file serves as the entry point for the application, orchestrating the main functionality
