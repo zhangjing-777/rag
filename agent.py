@@ -36,22 +36,22 @@ from execute import execute_code, format_response
 
 
 class CodeRAGAgent:
+    # Initializes the CodeRAGAgent with a retriever, prompt template, model, and DataFrame.
     def __init__(self, retriever, prompt, model, df):
-        # Initializes the CodeRAGAgent with a retriever, prompt template, model, and DataFrame.
         self.retriever = retriever
         self.prompt = prompt
         self.model = model
         self.df = df
 
+    # Complement the RAG workflow
     def processor(self, query):
-        # Complement the RAG workflow
         context = self.retriever.retrieve_schema(query, self.df)
         prompt_output = self.prompt.format(context=context, question=query)
         model_output = self.model.invoke(prompt_output)
         return model_output
-    
+  
+    # Execute the code and get the result
     def invoke(self, query):
-        # Execute the code and get the result
         result = None
         max_attempts = 3  
         attempts = 0
@@ -67,18 +67,18 @@ class CodeRAGAgent:
 
     
 class InterpRAGAgent:
+    # Initializes the InterpRAGAgent with a prompt template and model.
     def __init__(self, prompt, model):
-        # Initializes the InterpRAGAgent with a prompt template and model.
         self.prompt = prompt
         self.model = model
 
+    # Complement the RAG workflow
     def processor(self, context, query):
-        # Complement the RAG workflow
         prompt_output = self.prompt.format(context=context, question=query)
         return self.model.invoke(prompt_output)
     
-    def invoke(self, context, query):
-        # complement the processor method and format the response.
+    # Complement the processor method and format the response.
+    def invoke(self, context, query):       
         response = self.processor(context, query)
         return format_response(response)
         

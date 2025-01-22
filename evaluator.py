@@ -42,25 +42,25 @@ from bert_score import score
 
 
 class RetrievalEvaluator:
+    # Initializes the evaluator with retrieved and relevant documents.
     def __init__(self, retrieved_docs, relevant_docs):
-        # Initializes the evaluator with retrieved and relevant documents.
         self.retrieved_docs = retrieved_docs
         self.relevant_docs = relevant_docs
 
+    # Calculates Recall@k metric, which measures the proportion of relevant documents retrieved.
     def recall_at_k(self):
-        # Calculates Recall@k metric, which measures the proportion of relevant documents retrieved.
         relevant_retrieved = len(set(self.retrieved_docs) & set(self.relevant_docs))
         return relevant_retrieved / len(self.relevant_docs)
 
+    # Calculates Mean Reciprocal Rank (MRR), which evaluates the rank of the first relevant document.
     def mean_reciprocal_rank(self):
-        # Calculates Mean Reciprocal Rank (MRR), which evaluates the rank of the first relevant document.
         for i, doc in enumerate(self.retrieved_docs, start=1):
             if doc in self.relevant_docs:
                 return 1 / i
         return 0
 
+    # Returns a dictionary containing the evaluation metrics: Recall@k and MRR.
     def evaluate(self):
-        # Returns a dictionary containing the evaluation metrics: Recall@k and MRR.
         return {
             f"Recall@k": self.recall_at_k(),
             "MRR": self.mean_reciprocal_rank()
@@ -69,17 +69,17 @@ class RetrievalEvaluator:
 
 
 class GenerCodeEvaluator:
+    # Initializes the evaluator with generated and reference code.
     def __init__(self, generated, reference):
-        # Initializes the evaluator with generated and reference code.
         self.generated = generated
         self.reference = reference
 
+    # Calculates Exact Match metric, which checks if the generated code matches the reference code exactly.
     def exact_match(self):
-        # Calculates Exact Match metric, which checks if the generated code matches the reference code exactly.
         return int(self.generated.strip().lower() == self.reference.strip().lower())
     
+    # Calculates F1 Score, which is the harmonic mean of precision and recall for the generated code.
     def f1_score(self):
-        # Calculates F1 Score, which is the harmonic mean of precision and recall for the generated code.
         gen_tokens = set(self.generated.split())
         ref_tokens = set(self.reference.split())
         common = gen_tokens & ref_tokens
@@ -90,8 +90,8 @@ class GenerCodeEvaluator:
         f1 = 2 * (precision * recall) / (precision + recall)
         return round(f1,2)
     
+    # Returns a dictionary containing the evaluation metrics: Exact Match and F1 Score.
     def evaluate(self):
-        # Returns a dictionary containing the evaluation metrics: Exact Match and F1 Score.
         return {
             "Exact Match": self.exact_match(),
             "F1 Score": self.f1_score()
@@ -99,9 +99,10 @@ class GenerCodeEvaluator:
     
 
 
+# Computes the F1 score using the BERTScore method for comparing generated and reference texts.
 def bert_score_f1(generated, reference):
-    # Computes the F1 score using the BERTScore method for comparing generated and reference texts.
-    P, R, F1 = score(generated, reference, lang="zh")
+    # Set lang to "en" for English
+    P, R, F1 = score(generated, reference, lang="en")
     return round(float(F1.mean().item()),2)
 
         
