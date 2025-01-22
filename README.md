@@ -7,6 +7,8 @@ pip install -r requirements.txt
 # Data
 - The data used in the `test_case.ipynb` are the `students_performance.csv`  and `product.csv` files. The `students_performance.csv` is downloaded from the [kaggle](https://www.kaggle.com/datasets/spscientist/students-performance-in-exams) website, and the `product.csv` is randomly generated using pandas code.
 - The data used in the `test_evaluate.ipynb` is the `sample_score.csv` file, which is created by randomly selecting 20 rows of data from the `students_performance.csv` file.
+  
+You can see all the data in the `data` folder.
 
 # Modules Introduction:
 ## `main.py`
@@ -224,4 +226,4 @@ This notebook displays some user Q&A examples using the `main` function in the `
 
 
 # System Architecture Diagram
-![System Architecture Diagram](architecture.001.jpeg)
+![System Architecture Diagram](diagram/architecture.001.jpeg)
