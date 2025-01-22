@@ -10,16 +10,19 @@ This file serves as the entry point for the application, orchestrating the main 
 of the retrieval-augmented generation system. It initializes necessary components, processes input data,and handles user queries to generate responses.
 
 Functionality:
-The `main` function reads a DataFrame from a CSV file, initializes the retriever, prompt and model,and sets up the agents for code generation and interpretation.It processes a predefined query to retrieve relevant information and generate a response.The application can be run directly, executing the main function.
+
+- The `main` function reads a DataFrame from a CSV file, initializes the retriever, prompt and model,and sets up the agents for code generation and interpretation.It processes a predefined query to retrieve relevant information and generate a response.
+- The application can be run directly, executing the main function.
 
 Usage:
+
 For running directly:
 1. Ensure the required CSV file ('sample_product.csv') is available in the working directory.
 2. Run the script to execute the main function:
    ```bash
    python main.py
    ```
-3. The application will process the query and output the results to the console.
+   The application will process the query and output the results to the console.
 
 For calling the main function with your desired DataFrame and query:
    ```python
@@ -27,15 +30,15 @@ For calling the main function with your desired DataFrame and query:
    ```
 
 ## `agent.py`
-This file defines the CodeRAGAgent and InterpRAGAgent classes, which are responsible for processing queries and generating responses using a retrieval-augmented generation approach.
+This file defines the `CodeRAGAgent` and `InterpRAGAgent` classes, which are responsible for processing queries and generating responses using a retrieval-augmented generation approach.
 
 Functionality:
-- The CodeRAGAgent class retrieves relevant context(schema information of the dataframe) based on a query, formats a prompt, invokes a model,and executes the generated code to obtain results.
-- The InterpRAGAgent class processes context(the results of the CodeRAGAgent) and queries to generate textual responses using a model,and formats the output for user-friendly presentation.
+- The `CodeRAGAgent` class retrieves relevant context(schema information of the dataframe) based on a query, formats a prompt, invokes a model,and executes the generated code to obtain results.
+- The `InterpRAGAgent` class processes context(the results of the `CodeRAGAgent`) and queries to generate textual responses using a model,and formats the output for user-friendly presentation.
 
 Usage:
-For the CodeRAGAgent:
-1. Create an instance of the CodeRAGAgent class with the necessary parameters(the retriever, prompt, and model are instances of the classes/functions defined in the retriever.py, prompt.py, and model.py files, respectively.):
+For the `CodeRAGAgent`:
+1. Create an instance of the `CodeRAGAgent` class with the necessary parameters(the retriever, prompt, and model are instances of the classes/functions defined in the retriever.py, prompt.py, and model.py files, respectively.):
    ```python
    agent = CodeRAGAgent(retriever, prompt, model, df)
    ```
@@ -44,7 +47,7 @@ For the CodeRAGAgent:
    result = agent.invoke(query)
    ```
 
-For the InterpRAGAgent:
+For the `InterpRAGAgent`:
 1. Create an instance similarly(the prompt and model are instances of the classes/functions defined in the prompt.py and model.py files, respectively.):
    ```python
    interp_agent = InterpRAGAgent(prompt, model)
@@ -55,11 +58,11 @@ For the InterpRAGAgent:
    ```
 
 ## `model.py`
-This file defines a Model class for handling different types of language models, including local and remote models.
+This file defines a `Model` class for handling different types of language models, including local and remote models.
 
 Functionality:
-- The Model class supports calling language models through the OllamaLLM and ChatGroq libraries.
-- The invoke method automatically selects either the local model or the remote model based on the format of the model name (whether it contains a '-').
+- The `Model` class supports calling language models through the OllamaLLM and ChatGroq libraries.
+- The `invoke` method automatically selects either the local model or the remote model based on the format of the model name (whether it contains a '-').
 
 Usage:
 1. Import this file and create an instance of the Model class:
@@ -99,11 +102,11 @@ Usage:
    ```
 
 ## `retriever.py`
-This file defines a Retriever class for handling different retrieval modes, including 'bm25', 'embed', and 'hybrid'.
+This file defines a `Retriever` class for handling different retrieval modes, including 'bm25', 'embed', and 'hybrid'.
 It utilizes various retrievers from the Langchain library to process documents and return relevant results.
 
 Functionality:
-- The Retriever class initializes with a specified mode, embedding model name(from langchain_huggingface), and vector database.
+- The `Retriever` class initializes with a specified mode, embedding model name(from langchain_huggingface), and vector database.
 - It provides methods to build a schema corpus from a DataFrame and retrieve documents based on the selected mode.
 
 Usage:
@@ -143,9 +146,9 @@ Exact Match and F1 Score for code generation evaluation,
 and a function for computing the F1 score using the BERTScore method for textual generation evaluation.
 
 Functionality:
-- The RetrievalEvaluator class computes Recall@k and MRR metrics to assess the effectiveness of document retrieval systems.
-- The GenerCodeEvaluator class calculates Exact Match and F1 Score metrics to evaluate the quality of generated code against reference code.
-- The bert_score_f1 function computes the F1 score using the BERTScore method for comparing generated and reference texts.
+- The `RetrievalEvaluator` class computes Recall@k and MRR metrics to assess the effectiveness of document retrieval systems.
+- The `GenerCodeEvaluator` class calculates Exact Match and F1 Score metrics to evaluate the quality of generated code against reference code.
+- The `bert_score_f1` function computes the F1 score using the BERTScore method for comparing generated and reference texts.
 
 Usage:
 For retrieval evaluation:
