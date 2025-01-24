@@ -228,5 +228,5 @@ This notebook displays some user Q&A examples using the `main` function in the `
 # System Architecture Diagram
 ![System Architecture Diagram](diagram/architecture.001.jpeg)
 
-# Diagram
-- The diagrams of the workflow of the modulesare in the `diagram` folder.
+# Diagrams
+- The workflow diagrams of the modules are in the `diagrams` folder.
